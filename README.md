@@ -1,7 +1,7 @@
 # BAM-azon!
 
 ## Description
-The Bam-azon! app takes in orders from customers and deplete stock from the store's inventory. This application uses a simple command line Amazon.com emulator like storefront. It uses the npm inquirer and cli.table package along with Node.Js and MySQL database backend together with the npm mysql package. The application presents a customer interface.
+The BAM-azon! app takes in orders from customers and deplete stock from the store's inventory. This storefront like application uses a simple command line emulator. It uses the npm inquirer and cli.table package along with Node.Js and MySQL database backend together with the npm mysql package. The application presents a customer interface.
 
 ### MySQL Database Setup
 To run BAM-azon!, you should have the MySQL database already set up on your machine. If you don't, visit the MySQL installation page to install the version you need for your operating system. Once you have MySQL installed, you can create the Bamazon database and the products table with the SQL code found in Bamazon.sql. Run this code inside your MySQL client to populate the database, then you will be ready to proceed with running the BAM-azon! customer interface.
@@ -22,4 +22,4 @@ NodeJs and MySQL. NPM packages included are mysql, inquirer, and cli.table. When
 ### BAM-azon! Demo
 Click below to watch a demo of the BAM-azon! customer interface.
 
-Video Demonstration: 
+Video Demonstration: https://youtu.be/SFZHgwabZIM

@@ -33,7 +33,7 @@ function exitTag() {
 }
 
 function showInvoice() {
-  console.log('\n========== Invoice of Purchase ==========\n');
+  console.log('\n==================== Invoice of Purchase ====================\n');
 }
 
 // display items in table for sale
@@ -111,14 +111,14 @@ function placeOrder() {
               function (err, res) {
                 if (err) throw err;
 
-                console.log('Purchase successful!\n');
+                console.log('Thank you, your purchase was succesful.\n');
                 greeting();
                 displayProducts();
               }
             )
           } else {
 
-            console.log('Insufficient quantity please try again');
+            console.log('Insufficient quantity!');
             console.log('Available stock: ' + res[i].stock_quantity + '\n');
             greeting();
             displayProducts();
