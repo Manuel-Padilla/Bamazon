@@ -35,3 +35,20 @@ function exitTag() {
 function showInvoice() {
   console.log('\n========== Invoice of Purchase ==========\n');
 }
+
+// display items in table for sale
+function displayProducts() {
+  connection.query("SELECT * FROM products", function (err, res) {
+    if (err) throw err;
+    let table = new Table({
+      head: ['ID', 'Name', 'Department', 'Price', 'Stock']
+    })
+    for (let i = 0; i < res.length; i++) {
+      table.push([res[i].item_id, res[i].product_name, res[i].department_name, `$${res[i].price}`, res[i].stock_quantity]);
+    };
+    console.log('\n')
+    console.log(table.toString());
+  });
+  // invoke placeOrder function
+  placeOrder();
+};
