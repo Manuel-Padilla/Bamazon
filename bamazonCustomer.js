@@ -1,9 +1,8 @@
-require('dotenv').config();
-
 // Pull in required dependencies
-const Table = require('cli-table'),
-      keys = require('./keys.js'),
-      inquirer = require('inquirer');
+require('dotenv').config()
+const keys = require('./keys.js'),
+  inquirer = require('inquirer'),
+  Table = require('cli-table');
 
 let mysql = require('mysql');
 
@@ -14,16 +13,16 @@ let connection = mysql.createConnection({
   user: keys.user,
   password: keys.password,
   database: 'bamazon'
-});
+})
 
-connection.connect(function (err) {
-  if(err) throw err;
+// check for connection to database
+connection.connect((err) => {
+  if (err) throw err;
   greeting();
-  getProductID();
+  displayProducts();
 });
 
+// Set functions for greeting, exit and invoice for BAM-azon!
 function greeting() {
-  console.log('\n********************************** Welcome to BAM-azon! **********************************\n');
+  console.log('\n==================== You\'ve entered BAM-azon! ====================\n');
 }
-
-
