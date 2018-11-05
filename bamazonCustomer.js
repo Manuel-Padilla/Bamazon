@@ -26,3 +26,12 @@ connection.connect((err) => {
 function greeting() {
   console.log('\n==================== You\'ve entered BAM-azon! ====================\n');
 }
+
+function exitTag() {
+  console.log('\n');
+  console.log('========== Sorry to see you go but thanks for using BAM-azon! ==========\n');
+}
+
+function showInvoice() {
+  console.log('\n========== Invoice of Purchase ==========\n');
+}
