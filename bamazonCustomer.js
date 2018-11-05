@@ -52,3 +52,79 @@ function displayProducts() {
   // invoke placeOrder function
   placeOrder();
 };
+
+// items purchased stock is updated and invoice displayed
+function placeOrder() {
+  inquirer.prompt([{
+    type: 'input',
+    name: 'id',
+    message: 'Please enter the ID number of an item to purchase, press ' + `'${'x'}'` + ' to leave BAM-azon.',
+    validate: input => {
+      if (input.toLowerCase() == 'x') process.exit(exitTag())
+
+      if (isNaN(input)) {
+        return 'Please enter a valid ID number from the table above.'
+      }
+      return true
+    }
+  },
+  {
+    type: 'input',
+    name: 'quantity',
+    message: 'Please enter a quantity of purchase, press ' + `'${'x'}'` + ' to leave BAM-azon.',
+    validate: input => {
+      if (input.toLowerCase() == 'x') process.exit(exitTag())
+
+      if (isNaN(input)) {
+        return 'Enter a valid number to continue.'
+      }
+      return true
+    }
+  }
+  ]).then(function (order) {
+    
+    connection.query(
+      "SELECT * FROM products WHERE ?", {
+        item_id: order.id
+      },
+      function (err, res) {
+        if (err) throw err;
+        showInvoice();
+        let table = new Table({
+          head: ['Item Name', 'Quantity Purchased', 'Total Cost']
+        })
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].stock_quantity > order.quantity) {
+            let total = order.quantity * res[i].price;
+            table.push([res[i].product_name, order.quantity, `$${total}`]);
+            console.log(table.toString());
+            connection.query(
+              'UPDATE products SET ? WHERE ?',
+              [{
+                stock_quantity: res[i].stock_quantity - order.quantity,
+                product_sales: total
+              },
+              {
+                item_id: order.id
+              }
+              ],
+              function (err, res) {
+                if (err) throw err;
+
+                console.log('Purchase successful!\n');
+                greeting();
+                displayProducts();
+              }
+            )
+          } else {
+
+            console.log('Insufficient quantity please try again');
+            console.log('Available stock: ' + res[i].stock_quantity + '\n');
+            greeting();
+            displayProducts();
+          };
+        };
+      }
+    )
+  })
+};
